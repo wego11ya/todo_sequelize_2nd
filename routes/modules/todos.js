@@ -2,6 +2,19 @@ const express = require('express')
 const router = express.Router()
 const { Todo } = require("../../models");
 
+router.get('/new', (req,res) => {
+  return res.render('new')
+})
+
+router.post('/', (req,res) => {
+  const UserId = req.user.id
+  const name = req.body.name
+
+  return Todo.create({name, UserId})
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 router.get('/:id', (req, res) => {
   const UserId = req.user.id
   const id = req.params.id
