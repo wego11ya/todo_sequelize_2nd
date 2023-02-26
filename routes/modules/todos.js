@@ -3,10 +3,12 @@ const router = express.Router()
 const { Todo } = require("../../models");
 
 router.get('/:id', (req, res) => {
+  const UserId = req.user.id
   const id = req.params.id
-  return Todo.findByPk(id)
-    .then((todo) => {
-      console.log(todo)
+  return Todo.findOne({
+    where: {id, UserId}
+  })
+    .then((todo) => {      
       res.render('detail', { todo: todo.toJSON() })})
     .catch(error => console.log(error))
 })
