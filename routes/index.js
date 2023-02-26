@@ -7,8 +7,8 @@ const users = require('./modules/users')
 const todos = require('./modules/todos')
 
 // 引入路由模組，將網址結構導向符合/字串的request導向對應的模組
-router.use('/users', users)
 router.use('/todos', todos)
+router.use('/users', users)
 router.use('/', home)
 
 module.exports = router
